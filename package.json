@@ -7,8 +7,9 @@
     "lint": "tslint ./src/**/*.ts -t verbose",
     "start": "ng serve",
     "test": "ng test",
-    "test-ci": "ng test --watch=false --browsers=ChromeHeadless",
+    "test-ci": "ng test --code-coverage --no-watch --no-progress --browsers=ChromeHeadless",
     "build": "ng build --prod",
+    "sonar": "sonar-scanner",
     "e2e": "ng e2e",
     "ng": "ng"
   },
@@ -49,8 +50,10 @@
     "karma-jasmine-html-reporter": "^1.4.2",
     "lodash": "^4.16.2",
     "protractor": "~5.4.0",
+    "sonarqube-scanner": "2.5.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
+    "tslint-sonarts": "1.9.0",
     "typescript": "~3.4.3"
   },
   "repository": {}

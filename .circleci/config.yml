@@ -33,6 +33,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      # run tests!
+      # run build, tests and SonarQube
       - run: yarn run build
       - run: yarn run test-ci
+      - run: yarn run sonar
