@@ -199,13 +199,10 @@ the standard linter for `TypeScript`. The default linting tool for `Angular`.
     > --[tslint readme](https://github.com/palantir/tslint/blob/master/README.md) as of 15th October 2019.
 
 
-
 ## [SonarSource](https://www.sonarsource.com/)
 
 provides solutions for continuous code quality:
 - on-premise **[SonarQube](https://www.sonarqube.org/)** - it is installed and runs on computers on the premises of the person or organization using the software. Community version available.
-
-
 - **[SonarCloud](https://sonarcloud.io/about)** works in the cloud, free for open-source projects - used in this repository.
 
 <details><summary><b>Show instructions on how to integrate an existing Angular project with Sonar</b></summary>
