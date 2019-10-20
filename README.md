@@ -13,20 +13,27 @@ Check out this project on [stackblitz](https://stackblitz.com/github/crappylime/
 
 ## Table of contents
   - [Motivation](#motivation)
+  - [Built With](#built-with)
   - [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Installing](#installing)
   - [TSLint](#tslint)
-  - [SonarSource](#sonarsource)
+  - [SonarQube vs SonarCloud](#sonarqube-vs-sonarcloud)
+  - [CI pipeline](#ci-pipeline)
   - [License](#license)
   - [Credits](#credits)
 
 ## Motivation
 It is always good to ask yourself about the quality of the code, whether it will be easy to maintain, and maybe management also wants to know about it. When the SonarQube report can help, TSLint can check and enforce the high quality code of your peers.
 
+## Built With
+
+* [Angular v. 8.0.0](https://angular.io) - The web framework used
+* [Node.js v. 10.16.3](https://nodejs.org) - JavaScript runtime built
+* [NPM v. 6.9.0](https://www.npmjs.com) - Dependency Management
+* [CircleCI](https://circleci.com) - Continuous Integration
+
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+<details><summary><b>Show instructions on how to get a copy of the project up and running on your local machine with SonarCloud</b></summary>
 
 ### Prerequisites
 * [VS Code](https://code.visualstudio.com) (you will get extensions that I recommend) or other IDE
@@ -93,6 +100,8 @@ These instructions will get you a copy of the project up and running on your loc
 
 12. Check out the produced SonarQube analysis on [SonarCloud](https://sonarcloud.io).
 
+</details>
+
 ## [TSLint](https://palantir.github.io/tslint/)
 
 the standard linter for `TypeScript`. The default linting tool for `Angular`.  
@@ -109,8 +118,15 @@ the standard linter for `TypeScript`. The default linting tool for `Angular`.
     The default configuration for `Angular` is specified in the project's `tslint.json` file.
 
     `tslint.json` extends `"tslint:recommended"` to include rules recommended for TypeScript projects, they can be found [here](https://github.com/palantir/tslint/blob/master/src/configs/recommended.ts).
+    
+    The `Angular` `tslint.json` file also contains [Codelyzer](https://github.com/mgechev/codelyzer) rules that are specific to `Angular`:
+    ```
+      "rulesDirectory": [
+        "codelyzer"
+    ]
+    ```
 
-    All these rules are described [here](https://palantir.github.io/tslint/rules/) along with the given **scheme** and example.
+    All tslint rules are described [here](https://palantir.github.io/tslint/rules/) along with the given scheme and example.
 
     The TS rules are divided into 5 categories:
     - TS-specific,
@@ -122,13 +138,6 @@ the standard linter for `TypeScript`. The default linting tool for `Angular`.
     Each rule can have one of the flags: TS Only, Has Fixer, Requires type info.
 
     There is a [playground](https://palantir.github.io/tslint-playground/) available to test each of them.
-
-    The `Angular` `tslint.json` file also contains [Codelyzer](https://github.com/mgechev/codelyzer) rules that are specific to `Angular`:
-    ```
-      "rulesDirectory": [
-        "codelyzer"
-    ]
-    ```
 
 3. [Custom rule sets from the community](https://github.com/palantir/tslint/blob/master/README.md#custom-rules--plugins)
 
@@ -165,7 +174,7 @@ the standard linter for `TypeScript`. The default linting tool for `Angular`.
     "lint": "ng lint"
     ```
 
-    [ng lint](https://angular.io/cli/lint) has several flags. Among them `--fix`.
+    [ng lint](https://angular.io/cli/lint) has several flags. Among them `--fix` that automatically fixes errors for rules marked with *Has Fixer*.
 
     You can run it with `npm`:
 
@@ -190,7 +199,7 @@ the standard linter for `TypeScript`. The default linting tool for `Angular`.
 
     It depends on your team's workflow. However, if you tend to put the same comment over and over when reviewing the code, you can probably automate it.
     
-    Some tslint rules that I found interesting in the [angular-tslint-rules](https://github.com/fulls1z3/angular-tslint-rules/blob/master/tslint.json): no-implicit-dependencies, prefer-template, typedef, strict-boolean-expressions, no-boolean-literal-compare, arrow-return-shorthand, max-file-line-count, restrict-plus-operands, prefer-conditional-expression, template-cyclomatic-complexity, prefer-readonly.
+    **Some tslint rules that I found interesting** in the [angular-tslint-rules](https://github.com/fulls1z3/angular-tslint-rules/blob/master/tslint.json): no-implicit-dependencies, prefer-template, typedef, strict-boolean-expressions, no-boolean-literal-compare, arrow-return-shorthand, max-file-line-count, restrict-plus-operands, prefer-conditional-expression, template-cyclomatic-complexity, prefer-readonly.
 
 7. Deprecation
 
@@ -199,11 +208,16 @@ the standard linter for `TypeScript`. The default linting tool for `Angular`.
     > --[tslint readme](https://github.com/palantir/tslint/blob/master/README.md) as of 15th October 2019.
 
 
-## [SonarSource](https://www.sonarsource.com/)
+## SonarQube vs SonarCloud
 
-provides solutions for continuous code quality:
-- on-premise **[SonarQube](https://www.sonarqube.org/)** - it is installed and runs on computers on the premises of the person or organization using the software. Community version available.
-- **[SonarCloud](https://sonarcloud.io/about)** works in the cloud, free for open-source projects - used in this repository.
+- **[SonarQube](https://www.sonarqube.org/)**:
+    -   platform for continuous inspection of code quality,
+    -   performs automatic reviews with static analysis of code, detects bugs, code smells, security vulnerabilities,
+    -   on 20+ programming languages,
+    -   installed and runs on computers of the person or organization using the software,
+    -   community version available.
+
+- **[SonarCloud](https://sonarcloud.io/about)** is the same as SonarQube, but works in the cloud, free for open-source projects - used in this repository.
 
 <details><summary><b>Show instructions on how to integrate an existing Angular project with Sonar</b></summary>
 
@@ -246,6 +260,10 @@ provides solutions for continuous code quality:
     sonar.javascript.lcov.reportPaths=coverage/angular.io-example/lcov.info
     ```
 
+    SonarQube docs:
+    - [Analysis properties](https://docs.sonarqube.org/latest/analysis/analysis-parameters/)
+    - [Narrowing the focus](https://docs.sonarqube.org/latest/project-administration/narrowing-the-focus/) with `sonar.sources`.
+
 5. Do not forget to change in `sonar-project.properties` the following:
    * `sonar.host.url` to your host if you have SonarQube deployed
    * `sonar.projectKey`
@@ -275,7 +293,7 @@ provides solutions for continuous code quality:
     $ ng test --code-coverage --no-watch --browsers=ChromeHeadless
     ```
 
-9. Trigger the sonar analysis for project:
+9.  Trigger the sonar analysis for project:
 
     ```sh
     $ npm run sonar
@@ -283,12 +301,11 @@ provides solutions for continuous code quality:
 
 </details>
 
-## Built With
+## CI Pipeline
 
-* [Angular v. 8.0.0](https://angular.io) - The web framework used
-* [NPM v. 6.9.0](https://www.npmjs.com) - Dependency Management
-* [Node.js v. 10.16.3](https://nodejs.org) - JavaScript runtime built
-* [CircleCI](https://circleci.com) - Continuous Integration
+CI Pipeline example with linter, tests and sonar:  
+    - [build](https://circleci.com/gh/crappylime/pure-heroes/29) that fails on linter  
+    - [build](https://circleci.com/gh/crappylime/pure-heroes/32) that succeeds
 
 ## License
 
